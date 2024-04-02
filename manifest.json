@@ -1,11 +1,12 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
+	"id": "xcharts",
+	"name": "XCharts",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "使得 Obsidian 支持各种 Charts",
+	"author": "lzan13",
+	"authorUrl": "https://melove.net",
+	"fundingUrl": "https://melove.net/pricing",
+	"helpUrl": "https://melove.net/help/xcharts",
 	"isDesktopOnly": false
 }

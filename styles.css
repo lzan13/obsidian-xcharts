@@ -6,3 +6,9 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+.vm-xcharts-container {
+	display: flex;
+
+	justify-content: center; /* 水平居中 */
+	align-items: center; /* 垂直居中 */
+}
