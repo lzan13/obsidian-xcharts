@@ -92,7 +92,7 @@ export const XChartsData = {
 			show: true,
 			color: "inherit",
 			fontSize: "16",
-			formatter: "{b}:{c}",
+			formatter: "{c}",
 			position: "outside",
 		},
 		labelLine: {

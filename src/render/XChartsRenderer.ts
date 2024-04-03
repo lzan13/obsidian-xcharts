@@ -85,6 +85,10 @@ export default class XChartsRenderer {
 	rendererPieChart() {
 		let chartOptions = {
 			...XChartsData.charts.common,
+			tooltip: {
+				show: true,
+				trigger: "axis",
+			},
 			series: [
 				{
 					type: this.options.type,
