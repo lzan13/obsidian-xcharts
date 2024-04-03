@@ -1,12 +1,10 @@
 {
-	"id": "xcharts",
+	"id": "object-xcharts",
 	"name": "XCharts",
-	"version": "0.0.1",
-	"minAppVersion": "0.15.0",
+	"version": "1.0.0",
+	"minAppVersion": "1.5.0",
 	"description": "使得 Obsidian 支持各种 Charts",
 	"author": "lzan13",
 	"authorUrl": "https://melove.net",
-	"fundingUrl": "https://melove.net/pricing",
-	"helpUrl": "https://melove.net/help/xcharts",
 	"isDesktopOnly": false
 }

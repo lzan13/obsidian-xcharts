@@ -1,11 +1,11 @@
 /**
  * 定义 XCharts 设置接口
  */
-interface IXChartsSettings {
-	// 是否开启图标
-	iconEnable: Boolean;
+export interface IXChartsSettings {
+	// 是否开启 Ribbon 图标
+	enableRibbonIcon: boolean;
 }
 
-const defaultSettings: IXChartsSettings = {
-	iconEnable: true,
+export const defaultSettings: IXChartsSettings = {
+	enableRibbonIcon: true,
 };

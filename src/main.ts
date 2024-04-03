@@ -1,28 +1,34 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin } from "obsidian";
+import { Plugin } from "obsidian";
 import XChartsRenderer from "./render/XChartsRenderer";
 import XChartsModal from "./ui/XChartsModal";
 import XChartsSettingTab from "./ui/XChartsSettingsTab";
+import { defaultSettings, IXChartsSettings } from "./constants/XChartsSettings";
 
 /**
  * XCharts 插件类定义
  */
 export default class XChartsPlugin extends Plugin {
 	// 插件设置
-	xChartsSettings: IXChartsSettings;
+	settings: IXChartsSettings;
 
 	/**
 	 * 设置侧边栏图标元素
 	 */
 	setupIconEL() {
-		console.log("setupIconEL");
+		console.log(`setupIconEL ${this.settings.enableRibbonIcon}`);
+
+		// if (!this.settings.enableRibbonIcon) {
+		// 	console.log("not need ribbon icon");
+		// 	return;
+		// }
 		// 在左边导航栏创建一个图标
 		const ribbonIconEl = this.addRibbonIcon(
 			"chart", // 图标
 			"创建图表", // 悬停提示文本
 			(evt: MouseEvent) => {
-				// 出发图标点击事件
-				// Called when the user clicks the icon.
-				new Notice("创建图表通知");
+				// 打开创建图表弹窗
+				let modal = new XChartsModal(this.app, "pie");
+				modal.createPie();
 			}
 		);
 		// 给图标添加 css class
@@ -33,7 +39,6 @@ export default class XChartsPlugin extends Plugin {
 	 * 在底部状态栏添加内容，移动端不起作用
 	 */
 	setupStatusBarItemEL() {
-		console.log("setupStatusBarItemEL");
 		const statusBarItemEl = this.addStatusBarItem();
 		statusBarItemEl.setText("Status Bar Text");
 	}
@@ -42,7 +47,6 @@ export default class XChartsPlugin extends Plugin {
 	 * 设置图表相关命令
 	 */
 	setupCommand() {
-		console.log("setupCommand");
 		// 添加一个新建图表命令
 		this.addCommand({
 			id: "vm-xcharts-create",
@@ -58,7 +62,7 @@ export default class XChartsPlugin extends Plugin {
 	 * 设置 Markdown 代码快处理器
 	 */
 	setupMarkdownCodeBlockProcessor() {
-		console.log("setupMarkdownCodeBlockProcessor");
+		// console.log("setupMarkdownCodeBlockProcessor");
 		// 注册 markdown 代码块处理器 xcharts
 		this.registerMarkdownCodeBlockProcessor("xcharts", (source, el) => {
 			let renderer = new XChartsRenderer(source, el);
@@ -77,7 +81,10 @@ export default class XChartsPlugin extends Plugin {
 	 * 插件加载方法
 	 */
 	async onload() {
-		console.log("XChartsPlugin.onload");
+		// console.log("XChartsPlugin.onload");
+
+		// 加载设置
+		await this.loadSettings();
 
 		// 设置侧边栏图标元素
 		this.setupIconEL();
@@ -97,22 +104,20 @@ export default class XChartsPlugin extends Plugin {
 
 	// 插件取消加载
 	onunload() {
-		console.log("XChartsPlugin.onunload");
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
+		// console.log("XChartsPlugin.onunload");
 	}
 
-	onOpen() {
-		const { contentEl } = this;
-		contentEl.setText("Woah!");
+	// 加载设置
+	async loadSettings() {
+		this.settings = Object.assign(
+			{},
+			defaultSettings,
+			await this.loadData()
+		);
 	}
 
-	onClose() {
-		const { contentEl } = this;
-		contentEl.empty();
+	// 保存设置
+	async saveSettings() {
+		await this.saveData(this.settings);
 	}
 }

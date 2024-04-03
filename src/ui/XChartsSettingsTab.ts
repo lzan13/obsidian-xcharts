@@ -18,32 +18,18 @@ export default class XChartsSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
-		// new Setting(containerEl)
-		// 	.setName("默认设置项")
-		// 	.setDesc("这是设置描述")
-		// 	.addToggle(())
-		// 	.addText((text) =>
-		// 		text
-		// 			.setPlaceholder("输入设置")
-		// 			.setValue(this.plugin.xChartsSettings.iconEnable)
-		// 			.onChange(async (value) => {
-		// 				this.plugin.xChartsSettings.iconEnable = value;
-		// 				await this.plugin.saveSettings();
-		// 			})
-		// 	);
-	}
-
-	// 加载设置
-	async loadSettings() {
-		this.plugin.xChartsSettings = Object.assign(
-			{},
-			defaultSettings,
-			await this.plugin.loadData()
-		);
-	}
-
-	// 保存设置
-	async saveSettings() {
-		await this.plugin.saveData(this.plugin.xChartsSettings);
+		new Setting(containerEl)
+			.setName("在侧边栏显示图标")
+			.setDesc("在侧边栏中显示图表图标，允许您在任何地方快速使用创建图表")
+			.addToggle((toggle) => {
+				toggle
+					.setValue(this.plugin.settings.enableRibbonIcon)
+					.onChange(async (status) => {
+						this.plugin.settings.enableRibbonIcon = status;
+						await this.plugin.saveSettings();
+						// Force refresh
+						this.display();
+					});
+			});
 	}
 }
