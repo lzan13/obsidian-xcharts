@@ -5,6 +5,7 @@
 *.iml
 .idea
 
+/dist
 # npm
 /node_modules
 
